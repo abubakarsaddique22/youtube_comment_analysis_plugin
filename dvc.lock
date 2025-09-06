@@ -37,3 +37,55 @@ stages:
       md5: ba42408e7bd1e85685474d6a349ae57e.dir
       size: 5134850
       nfiles: 2
+  feature_engineering:
+    cmd: python src/features/feature_engineering.py
+    deps:
+    - path: data/interim/test_processed.csv
+      hash: md5
+      md5: 4f30375397ec89fead1745ee6d70f201
+      size: 1000526
+    - path: data/interim/train_processed.csv
+      hash: md5
+      md5: 35027dfda8274bd9356544f2ff358aa4
+      size: 4134324
+    - path: src/features/feature_engineering.py
+      hash: md5
+      md5: 6fe5cad69661c087e58d72b22d2dd763
+      size: 5005
+    params:
+      params.yaml:
+        feature_engineering.max_features: 10000
+        feature_engineering.ngram_range:
+        - 1
+        - 3
+    outs:
+    - path: data/processed
+      hash: md5
+      md5: 44c63f02e7793196a86cdfc583340354.dir
+      size: 6104769
+      nfiles: 2
+  model_building:
+    cmd: python src/model/model_building.py
+    deps:
+    - path: data/processed/X_train_tfidf.pkl
+      hash: md5
+      md5: bd1ff74d94f8d5d4748498e9f39a114d
+      size: 5869976
+    - path: data/processed/y_train.pkl
+      hash: md5
+      md5: fb765243147297a07568cfc9c961a9ed
+      size: 234793
+    - path: src/model/model_building.py
+      hash: md5
+      md5: 011892b079d42111aaaff4a7b1cd0b92
+      size: 3943
+    params:
+      params.yaml:
+        model_building.learning_rate: 0.09
+        model_building.max_depth: 20
+        model_building.n_estimators: 367
+    outs:
+    - path: models/lgbm_model.pkl
+      hash: md5
+      md5: a5053c12366baf7489cc6ce688dd71aa
+      size: 4098382

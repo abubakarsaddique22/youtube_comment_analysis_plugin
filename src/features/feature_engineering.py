@@ -63,7 +63,7 @@ def load_data(file_path: str) -> pd.DataFrame:
     """
     try:
         df = pd.read_csv(file_path)
-        df.fillna('', inplace=True)
+        df.dropna(inplace=True)
         logger.debug(f'Data loaded from {file_path}')
         return df
     except Exception as e:
@@ -114,11 +114,12 @@ def save_features(X, y, save_dir: str) -> None:
         save_dir (str): Directory path to save files.
     """
     try:
-        os.makedirs(save_dir, exist_ok=True)
+        procesed_data_path = os.path.join(save_dir, 'processed')
+        os.makedirs(procesed_data_path, exist_ok=True)
 
-        with open(os.path.join(save_dir, 'X_train_tfidf.pkl'), 'wb') as f:
+        with open(os.path.join(procesed_data_path, 'X_train_tfidf.pkl'), 'wb') as f:
             pickle.dump(X, f)
-        with open(os.path.join(save_dir, 'y_train.pkl'), 'wb') as f:
+        with open(os.path.join(procesed_data_path, 'y_train.pkl'), 'wb') as f:
             pickle.dump(y, f)
 
         logger.debug(f'Features and labels saved to {save_dir}')
@@ -150,7 +151,7 @@ def main():
         X_train_tfidf, y_train = apply_tfidf(train_data, max_features, ngram_range)
 
         # Save features and labels
-        save_dir = os.path.join(root_dir, 'data/processed')
+        save_dir = os.path.join(root_dir, './data')
         save_features(X_train_tfidf, y_train, save_dir)
 
         logger.debug('Feature engineering completed successfully.')
