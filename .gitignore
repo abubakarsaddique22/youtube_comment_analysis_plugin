@@ -5,6 +5,8 @@ __pycache__/
 # C extensions
 *.so
 
+
+reddit_user_accessKeys.csv 
 # Distribution / packaging
 .Python
 env/
