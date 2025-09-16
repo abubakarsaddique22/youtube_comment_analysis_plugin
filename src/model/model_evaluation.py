@@ -12,24 +12,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import json
 from mlflow.models import infer_signature
-import dagshub
-    #  mlflow.set_tracking_uri("https://dagshub.com/abubakarsaddique3434/youtube_comment_analysis_plugin.mlflow")
-    # dagshub.init(repo_owner='abubakarsaddique3434', repo_name='youtube_comment_analysis_plugin', mlflow=True)
-
-# Set up DagsHub credentials for MLflow tracking
-dagshub_token = os.getenv("DAGSHUB_PAT")
-if not dagshub_token:
-    raise EnvironmentError("DAGSHUB_PAT environment variable is not set")
-
-os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
-os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
-
-dagshub_url = "https://dagshub.com"
-repo_owner = "abubakarsaddique3434"
-repo_name = "youtube_comment_analysis_plugin"
-
-# Set up MLflow tracking URI
-mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
 
 # logging configuration
 logger = logging.getLogger('model_evaluation')
@@ -145,6 +127,7 @@ def save_model_info(run_id: str, model_path: str, file_path: str) -> None:
 
 
 def main():
+    mlflow.set_tracking_uri('http://13.61.25.27:5000/')
     mlflow.set_experiment("dvc-pipeline-runs")
 
     with mlflow.start_run() as run:
@@ -182,8 +165,14 @@ def main():
             )
 
             # --- Save run info ---
+            # Ensure reports folder exists
+            os.makedirs("reports", exist_ok=True)  # ✅ Ensure folder exists
             model_path = "lgbm_model"
-            save_model_info(run.info.run_id, model_path, "reports/experiment_info.json")
+            save_model_info(
+                run.info.run_id,
+                model_path,
+                os.path.join("reports", "experiment_info.json"),
+            )
 
             # --- Log vectorizer ---
             vectorizer_path = os.path.join(root_dir, "models/vectorizer.pkl")  # ✅ FIX: correct path
@@ -209,18 +198,9 @@ def main():
             mlflow.set_tag("task", "Sentiment Analysis")
             mlflow.set_tag("dataset", "YouTube Comments")
 
-            # --- ✅ Ensure experiment_info.json exists for DVC ---
-            os.makedirs("reports", exist_ok=True)
-            with open("reports/experiment_info.json", "w") as f:
-                json.dump({"status": "success", "run_id": run.info.run_id}, f, indent=4)
-
         except Exception as e:
             logger.error(f"Failed to complete model evaluation: {e}")
             print(f"Error: {e}")
-            # ✅ Write failure file so DVC doesn't break
-            os.makedirs("reports", exist_ok=True)
-            with open("reports/experiment_info.json", "w") as f:
-                json.dump({"status": "failed", "error": str(e)}, f, indent=4)
 
 
 if __name__ == "__main__":

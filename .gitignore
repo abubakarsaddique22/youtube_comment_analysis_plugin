@@ -6,7 +6,8 @@ __pycache__/
 *.so
 
 
-reddit_user_accessKeys.csv 
+yt_commit_analysis_user_accessKeys.csv 
+yt_analysis_key.pem 
 # Distribution / packaging
 .Python
 env/
