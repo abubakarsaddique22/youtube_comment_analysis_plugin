@@ -29,6 +29,7 @@ stages:
     - feature_engineering.ngram_range
     outs:
     - data/processed
+    - models/vectorizer.pkl
 
   model_building:
     cmd: python src/model/model_building.py
@@ -42,4 +43,13 @@ stages:
     - model_building.n_estimators
     outs:
     - models/lgbm_model.pkl
-    # - models/tfidf_vectorizer.pkl
+  model_evaluation:
+    cmd: python src/model/model_evaluation.py
+    deps:
+    - models/lgbm_model.pkl
+    - models/vectorizer.pkl
+    - data/interim/train_processed.csv
+    - data/interim/test_processed.csv
+    - src/model/model_evaluation.py
+    outs:
+    - reports/experiment_info.json
