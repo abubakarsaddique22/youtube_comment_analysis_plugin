@@ -158,11 +158,12 @@ def main():
 
             # --- Log model ---
             mlflow.sklearn.log_model(
-                model,
-                name="lgbm_model",   # ✅ FIX: use name instead of artifact_path
+                sk_model=model,
+                artifact_path="lgbm_model",   # This is required
                 signature=signature,
                 input_example=input_example
             )
+
 
             # --- Save run info ---
             # Ensure reports folder exists
