@@ -1,0 +1,12 @@
+boto3
+Flask
+Flask_Cors
+joblib
+lightgbm
+matplotlib
+mlflow
+mlflow_skinny
+nltk
+numpy
+pandas
+wordcloud
