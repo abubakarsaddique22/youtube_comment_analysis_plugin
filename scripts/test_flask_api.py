@@ -50,3 +50,6 @@ def test_generate_trend_graph_endpoint():
     response = requests.post(f"{BASE_URL}/generate_trend_graph", json=data)
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "image/png"
+
+
+print('just complete ')
