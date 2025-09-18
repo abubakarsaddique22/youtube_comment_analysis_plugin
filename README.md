@@ -1,11 +1,11 @@
 # Influencer Insights - YouTube Comment Analyzer
-### 📋 Project Overview
+#### 📋 Project Overview
 Influencer Insights is a Chrome extension designed to help content creators analyze and understand audience sentiment from YouTube video comments. This tool addresses the challenge influencers face in manually processing large volumes of comments by providing automated sentiment analysis, comment summarization, and valuable insights.  
--  
-### 🎯 Business Context
+ 
+#### 🎯 Business Context
 We are "Influence Boost Inc.," an influencer management company seeking to expand our network by attracting more influencers to our platform. With a limited marketing budget, we're offering this solution to address a significant pain point for influencers - managing and interpreting vast amounts of comment feedback.  
--  
-### ✨ Key Features
+  
+#### ✨ Key Features
 1. Sentiment Analysis of Comments  
    - Real-time sentiment classification (**positive, neutral, negative**)  
    - Sentiment distribution visualization with intuitive charts  
@@ -15,8 +15,8 @@ We are "Influence Boost Inc.," an influencer management company seeking to expan
    - **Word cloud visualization** of frequently used words and phrases  
    - **Average comment length** calculation to gauge engagement depth  
    - **Data export functionality** (PDF, CSV) for further analysis  
--  
-### 🛠️ Technology Stack
+  
+#### 🛠️ Technology Stack
 **Backend & Data Processing**  
 - **Python** - Core programming language  
 - **Flask** - RESTful API development  
@@ -35,8 +35,8 @@ We are "Influence Boost Inc.," an influencer management company seeking to expan
 - **MLflow** - Experiment tracking and model registry  
 - **AWS** - Cloud infrastructure (**EC2, ECR, S3, CodeDeploy**)  
 - **GitHub Actions** - CI/CD pipeline automation  
--  
-### 📊 Workflow
+ 
+#### 📊 Workflow
 - **Data Collection** - Gather YouTube comments through the Chrome extension  
 - **Data Preprocessing** - Clean and prepare comment data for analysis  
 - **EDA** - Exploratory data analysis to understand data patterns  
@@ -49,8 +49,8 @@ We are "Influence Boost Inc.," an influencer management company seeking to expan
 - **Testing** - Comprehensive testing of all components  
 - **Dockerization** - Containerize the application  
 - **AWS Deployment** - Deploy to cloud infrastructure  
--  
-### 🚀 Challenges Addressed
+ 
+#### 🚀 Challenges Addressed
 - Multi-language comment processing  
 - Handling slang, emojis, and informal language  
 - Detecting sarcastic comments  
@@ -59,8 +59,8 @@ We are "Influence Boost Inc.," an influencer management company seeking to expan
 - Dealing with spam and bot-generated comments  
 - Building efficient models with noisy, imbalanced data  
 - Maintaining low latency for real-time analysis  
--  
-### 📁 Project Structure
+
+#### 📁 Project Structure
 
     yt_commit_analysis/
     ├── LICENSE
@@ -122,8 +122,8 @@ We are "Influence Boost Inc.," an influencer management company seeking to expan
 
 
 
--  
-### 🏗️ Installation & Setup
+ 
+#### 🏗️ Installation & Setup
 **Prerequisites**  
 - **Python 3.11+**  
 - **java script** (for extension development)  
@@ -142,9 +142,9 @@ We are "Influence Boost Inc.," an influencer management company seeking to expan
 - Push to container registry  
 - Deploy to AWS using CodeDeploy  
 - Configure auto-scaling groups for load management  
--  
-### 📈 Model Performance
+ 
+#### 📈 Model Performance
 Our sentiment analysis model has been trained on **3.7K labeled comments**, achieving strong performance in classifying **positive, neutral, and negative** sentiments across diverse comment styles and languages.  
--  
+
 ---
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
