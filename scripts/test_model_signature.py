@@ -46,3 +46,6 @@ def test_model_with_vectorizer(model_name, stage, vectorizer_path):
 
     except Exception as e:
         pytest.fail(f"Model test failed with error: {e}")
+
+
+print('some text added for push up ')
