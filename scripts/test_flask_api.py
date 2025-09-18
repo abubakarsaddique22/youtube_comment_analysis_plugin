@@ -1,14 +1,8 @@
 import pytest
 import requests
 import json
-import os 
 
-BASE_URL = os.getenv("BASE_URL", "http://localhost:5000")
-
-skip_if_no_api = pytest.mark.skipif(
-    os.getenv("RUN_API_TESTS") != "true",
-    reason="Backend API not running in CI/CD"
-)
+BASE_URL = "http://localhost:5000"  # Replace with your deployed URL if needed
 
 def test_predict_endpoint():
     data = {
@@ -56,6 +50,3 @@ def test_generate_trend_graph_endpoint():
     response = requests.post(f"{BASE_URL}/generate_trend_graph", json=data)
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "image/png"
-
-
-print('just complete ')
